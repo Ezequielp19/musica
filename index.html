@@ -43,7 +43,7 @@
     <div class="container">
         <h1>Login</h1>
         <form onsubmit="return verificarLogin(event)">
-            <input type="text" id="usuario" placeholder="Usuario" required><br>
+<!--             <input type="text" id="usuario" placeholder="Usuario" required><br> -->
             <input type="password" id="password" placeholder="Contraseña" required><br>
             <button type="submit">Iniciar sesión</button>
         </form>
@@ -52,10 +52,10 @@
     <script>
         function verificarLogin(event) {
             event.preventDefault(); // Evitar recarga de página
-            const usuario = document.getElementById('usuario').value;
+            // const usuario = document.getElementById('usuario').value;
             const password = document.getElementById('password').value;
 
-            if (usuario === "ruben" && password === "la fiesta") {
+            if ( password === "fiesta") {
                 alert("Bienvenido Ruben Emilio Clerci");
                 window.location.href = "#home"; // Simula ir a otra página
                 document.body.innerHTML = `
