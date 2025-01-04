@@ -72,40 +72,41 @@ export class ApkListComponent implements OnInit {
     console.log('Archivos seleccionados:', this.audioFiles);
   }
 
-  async uploadMusic() {
-    if (!this.music.title || !this.music.artist || !this.music.genre) {
-      this.showToast(
-        'Por favor, complete todos los campos obligatorios.',
-        'warning'
-      );
-      return;
-    }
-
-    const id = uuidv4();
-    this.music.id = id;
-    this.music.releaseDate = new Date();
-
-    try {
-      if (this.audioFiles.length > 0) {
-        this.music.audioUrls = [];
-        for (const audio of this.audioFiles) {
-          const audioUrl = await this.firestoreService.uploadFile(
-            audio,
-            `music/${this.music.genre}/${id}/${audio.name}`
-          );
-          console.log('URL de la música subida:', audioUrl);
-          this.music.audioUrls.push(audioUrl);
-        }
-      }
-
-      await this.firestoreService.createDocument(this.music, `music/${id}`);
-      this.showToast('Música subida exitosamente', 'success');
-      this.resetForm();
-    } catch (error) {
-      console.error('Error al subir la música:', error);
-      this.showToast('Error al subir la música', 'danger');
-    }
+ async uploadMusic() {
+  if (!this.music.title || !this.music.artist || !this.music.genre) {
+    alert('Por favor, complete todos los campos obligatorios.');
+    return;
   }
+
+  const id = uuidv4();
+  this.music.id = id;
+  this.music.releaseDate = new Date();
+
+  try {
+    if (this.audioFiles.length > 0) {
+      this.music.audioUrls = [];
+      for (const audio of this.audioFiles) {
+        const audioUrl = await this.firestoreService.uploadFile(
+          audio,
+          `music/${this.music.genre}/${id}/${audio.name}`
+        );
+        console.log('URL de la música subida:', audioUrl);
+        this.music.audioUrls.push(audioUrl);
+      }
+    }
+
+    await this.firestoreService.createDocument(this.music, `music/${id}`);
+    alert('Música subida exitosamente');
+    this.resetForm();
+
+    // Redirigir al home
+    window.location.href = '/home'; // Cambia '/home' por la ruta que corresponda a tu página principal
+  } catch (error) {
+    console.error('Error al subir la música:', error);
+    alert('Error al subir la música');
+  }
+}
+
 
   resetForm() {
     this.music = {
