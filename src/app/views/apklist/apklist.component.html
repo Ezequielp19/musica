@@ -24,15 +24,23 @@
         <ion-input [(ngModel)]="music.artist" placeholder="Ingrese el artista"></ion-input>
       </ion-item>
 
-      <ion-item>
+<!--       <ion-item>
         <ion-label>Género</ion-label>
         <ion-select [(ngModel)]="music.genre" placeholder="Seleccione un género">
           <ion-select-option *ngFor="let genre of genres" [value]="genre.value">
             {{ genre.label }}
           </ion-select-option>
         </ion-select>
-      </ion-item>
+      </ion-item> -->
 
+<div>
+  <label for="genre">Género</label>
+  <select id="genre" [(ngModel)]="music.genre">
+    <option *ngFor="let genre of genres" [value]="genre.value">
+      {{ genre.label }}
+    </option>
+  </select>
+</div>
 
 
       <ion-item>
